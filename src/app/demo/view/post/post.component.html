@@ -1,0 +1,44 @@
+<div class="ui-fluid">
+    <div class="ui-g">
+
+        <div class="ui-g-12">
+            <p-breadcrumb [model]="breadcrumbItems" [home]="homeIcon"></p-breadcrumb>
+        </div>
+
+        <div class="ui-g-12">
+            <div class="card card-w-title">
+                <p-table [value]="posts" styleClass="table table-bordered">
+                    <ng-template pTemplate="header">
+                        <tr class="thead-dark">
+                            <th>image</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Body</th>
+                            <th>Created</th>
+                            <th>Action</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-post>
+                        <tr>
+                            <td>
+                                <img *ngIf="post.image" class="img-thumbnail" [src]="post?.image">
+                                <img *ngIf="!post.image" class="img-thumbnail" [src]="defaultImageUrl" alt="">
+                            </td>
+                            <td>{{post.name}}</td>
+                            <td>{{post.email}}</td>
+                            <td>{{post.body}}</td>
+                            <td>{{post.createdDate | date}}</td>
+                            <td>Edit/Delete</td>
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="summary" let-rowData>
+                        <div style="text-align:left; width: 6rem;">
+                            <button type="button" pButton icon="fa fa-plus" routerLink="create" label="Add"></button>
+                        </div>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>
