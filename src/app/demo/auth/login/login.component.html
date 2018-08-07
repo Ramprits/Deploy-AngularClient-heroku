@@ -1,3 +1,29 @@
-<p>
-  login works!
-</p>
+<div class="ui-fluid">
+  <div class="ui-g">
+    <div class="card card-w-title">
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+
+
+        <input type="email" placeholder="Email" required [(ngModel)]="email" name="email" #userEmail="ngModel">
+        <div *ngIf="!userEmail.valid && userEmail.touched">
+          Email is required!
+        </div>
+
+        <input type="password" placeholder="Password" required [(ngModel)]="password" name="password" #userPassword="ngModel">
+        <div *ngIf="!userPassword.valid && userPassword.touched">
+          Password is required!
+        </div>
+
+
+        <button type="submit" [disabled]="!loginForm.form.valid">
+          Register
+        </button>
+
+        <button type="button" (click)="loginForm.reset()">
+          Reset
+        </button>
+
+      </form>
+    </div>
+  </div>
+</div>
