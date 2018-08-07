@@ -2,7 +2,9 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Subject } from "rxjs";
 import { Employee } from "../domain/employee.model";
-import { last } from "@angular/router/src/utils/collection";
+import { environment } from "../../../environments/environment";
+
+const BAKEND_URL = environment.apiUrl;
 
 @Injectable({
     providedIn: "root"
@@ -15,9 +17,7 @@ export class EmployeeService {
 
     GetEmployees() {
         return this.http
-            .get<{ message: string; employees: Employee[] }>(
-                `http://localhost:4000/api/employees`
-            )
+            .get<{ message: string; employees: Employee[] }>(BAKEND_URL)
             .subscribe(employeeData => {
                 this.employees = employeeData.employees;
                 this.employeeSub.next([...this.employees]);
@@ -46,7 +46,7 @@ export class EmployeeService {
 
         return this.http
             .post<{ message: string; employee: Employee }>(
-                "http://localhost:4000/api/employees",
+                BAKEND_URL,
                 employeeData
             )
             .subscribe(response => {

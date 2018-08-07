@@ -2,6 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { IPost, PostModel } from "../domain/IPost";
 import { Subject } from "rxjs";
+import { environment } from "../../../environments/environment";
+const BAKEND_URL = environment.apiUrl;
 
 @Injectable({
     providedIn: "root"
@@ -14,9 +16,7 @@ export class PostService {
 
     GetPosts() {
         return this.http
-            .get<{ message: string; posts: IPost[] }>(
-                `http://blogapi-env.xwqegbpr6v.us-east-1.elasticbeanstalk.com/api/posts`
-            )
+            .get<{ message: string; posts: IPost[] }>(BAKEND_URL + `/api/posts`)
             .subscribe(postData => {
                 (this.posts = postData.posts), console.log(postData.message);
                 this.postSubject.next([...this.posts]);
@@ -37,7 +37,7 @@ export class PostService {
         console.log(postData);
         return this.http
             .post<{ message: string; posts: PostModel }>(
-                "http://localhost:4000/api/posts",
+                BAKEND_URL + "/api/posts",
                 postData
             )
             .subscribe(response => {
