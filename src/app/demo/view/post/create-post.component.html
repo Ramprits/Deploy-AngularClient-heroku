@@ -1,4 +1,4 @@
-<div class="card card-w-title">
+<!-- <div class="card card-w-title">
     <h1>Post</h1>
     <form [formGroup]="postForm" (ngSubmit)="onSave(postForm.value)">
         <div class="ui-g">
@@ -23,8 +23,34 @@
         <div class="ui-g-12 ui-md-1">
             <button pButton type="submit" label="Save" style="margin-bottom:10px" class="ui-button-primary"></button>
         </div>
-        <pre>
-    {{postForm.value|json}}
-</pre>
+       
     </form>
+</div>
+ -->
+
+<div class="row">
+    <div class="container">
+        <form [formGroup]="postForm" (ngSubmit)="onSave(postForm.value)">
+
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input id="name" formControlName="name" class="form-control" type="text">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input id="email" type="email" class="form-control" formControlName="email">
+            </div>
+            <div class="form-group">
+                <label for="Upload">Image upload:</label>
+                <input id="Upload" #fileUpload class="form-control-file" type="file" (change)="onBasicUploadAuto($event)">
+            </div>
+
+            <div class="form-group">
+                <label for="body">Body</label>
+                <textarea id="body" class="form-control" type="text"></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary btn-sm">Save</button>
+        </form>
+    </div>
 </div>
